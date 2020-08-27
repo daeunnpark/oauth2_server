@@ -7,8 +7,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
+import com.daeunp.springsecurityserver.service.CustomUserDetailsService;
+
+import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
@@ -17,6 +22,11 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private UserDetailService customUserDetailsService;
 	*/
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private UserDetailsService customUserDetailsService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -34,15 +44,16 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.parentAuthenticationManager(authenticationManagerBean())
-			.inMemoryAuthentication()
-			.withUser("PETER")
-			.password("peter")
-			.roles("ADMIN");
+			.userDetailsService(customUserDetailsService)
+			.passwordEncoder(bCryptPasswordEncoder);
 		
-		/*
-		 auth.parentAuthenticationManager(authenticationManager)
-		 	  .userDetailsService(customUserDetailsService);
-		 */
+		/*	
+		.inMemoryAuthentication()
+			.withUser("PETER")
+			.password(passwordEncoder().encode("peter"))
+			.roles("USER");
+		*/
+		
 	}
 
 	@Bean
@@ -50,5 +61,8 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 	    return super.authenticationManagerBean();
 	}
+	
+	
+
 
 }
