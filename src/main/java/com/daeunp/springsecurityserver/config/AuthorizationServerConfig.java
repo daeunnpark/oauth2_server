@@ -24,11 +24,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		/*
+		
         security.tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()");
-                */
-		//security.allowFormAuthenticationForClients();
+                .checkTokenAccess("isAuthenticated()")
+                .allowFormAuthenticationForClients();
 	}
 	
 	@Override
@@ -39,10 +38,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         .secret(passwordEncoder.encode("secret"))
         .authorizedGrantTypes("authorization_code")
         .scopes("user_info")
-        .autoApprove(true);
-
+        .redirectUris("http://localhost:8082/login");
 	}
-	
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {

@@ -10,38 +10,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
 import com.daeunp.springsecurityserver.service.CustomUserDetailsService;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration
 @EnableResourceServer
-public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
-	
-	/*
-	@Autowired
-	private UserDetailService customUserDetailsService;
-	*/
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private UserDetailsService customUserDetailsService;
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		/*
-		http.requestMatchers()
-				.antMatchers("/login", "/oauth/authorize", "/auth/login", "/auth/ouath/authorize", "/rest/hello/hi")
-				.and()
-				.authorizeRequests()
-				.anyRequest()
-				.authenticated()
-				.and()
-				.formLogin()
-				.permitAll();
-		*/
+	public void configure(HttpSecurity http) throws Exception {
 		
 		http
 			.headers()
@@ -49,36 +28,13 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 				.disable()
 				.and()
 			.authorizeRequests()
-				.antMatchers("/", "/login" ).permitAll()
-				.antMatchers("/rest/hello/hi").authenticated();
+				.antMatchers("/", "/login", "/rest/hello/hi" ).permitAll()
+				.and()
+			.formLogin()
+			.permitAll();
 			
 	}
-	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		/*
-		auth.parentAuthenticationManager(authenticationManagerBean())
-			.userDetailsService(customUserDetailsService)
-			.passwordEncoder(passwordEncoder);
-		*/
-		
-		
-		auth.parentAuthenticationManager(authenticationManagerBean())
-			.inMemoryAuthentication()
-			.withUser("PETER")
-			.password(passwordEncoder.encode("peter"))
-			.roles("USER");
-		
-		
-		
-	}
 
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-	    return super.authenticationManagerBean();
-	}
-	
 	
 
 
