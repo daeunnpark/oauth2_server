@@ -24,9 +24,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+		/*
         security.tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()");
-		security.allowFormAuthenticationForClients();
+                */
+		//security.allowFormAuthenticationForClients();
 	}
 	
 	@Override
@@ -38,6 +40,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         .authorizedGrantTypes("authorization_code")
         .scopes("user_info")
         .autoApprove(true);
+
 	}
 	
 	

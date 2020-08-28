@@ -22,37 +22,54 @@ public class ResourceServerConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private UserDetailService customUserDetailsService;
 	*/
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserDetailsService customUserDetailsService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		/*
 		http.requestMatchers()
-				.antMatchers("/login", "/oauth/authorize")
+				.antMatchers("/login", "/oauth/authorize", "/auth/login", "/auth/ouath/authorize", "/rest/hello/hi")
 				.and()
-			.authorizeRequests()
+				.authorizeRequests()
 				.anyRequest()
 				.authenticated()
 				.and()
-			.formLogin()
+				.formLogin()
 				.permitAll();
+		*/
+		
+		http
+			.headers()
+				.frameOptions()
+				.disable()
+				.and()
+			.authorizeRequests()
+				.antMatchers("/", "/login" ).permitAll()
+				.antMatchers("/rest/hello/hi").authenticated();
+			
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		/*
 		auth.parentAuthenticationManager(authenticationManagerBean())
 			.userDetailsService(customUserDetailsService)
-			.passwordEncoder(bCryptPasswordEncoder);
-		
-		/*	
-		.inMemoryAuthentication()
-			.withUser("PETER")
-			.password(passwordEncoder().encode("peter"))
-			.roles("USER");
+			.passwordEncoder(passwordEncoder);
 		*/
+		
+		
+		auth.parentAuthenticationManager(authenticationManagerBean())
+			.inMemoryAuthentication()
+			.withUser("PETER")
+			.password(passwordEncoder.encode("peter"))
+			.roles("USER");
+		
+		
 		
 	}
 
