@@ -12,6 +12,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
+import com.daeunp.springsecurityserver.service.CustomOauth2ClientDetailsService;
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
@@ -21,6 +23,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private CustomOauth2ClientDetailsService clientDetailService;
 	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -32,13 +37,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+		clients.withClientDetails(clientDetailService);
+		
+		/*
         clients
-        .inMemory()
-        .withClient("ClientId")
-        .secret(passwordEncoder.encode("secret"))
-        .authorizedGrantTypes("authorization_code")
-        .scopes("user_info")
-        .redirectUris("http://localhost:8082/login");
+	        .inMemory()
+	        .withClient("ClientId")
+	        .secret(passwordEncoder.encode("secret"))
+	        .authorizedGrantTypes("authorization_code")
+	        .scopes("user_info")
+	        .redirectUris("http://localhost:8082/login");
+        */
 	}
 	
 	@Override
