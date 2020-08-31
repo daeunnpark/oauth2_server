@@ -9,7 +9,7 @@
   <div layout:fragment="content">
     <form class="form-signin" th:action="@{/login}" method="POST">
       <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72" />
-      <h1 class="h3 mb-3 font-weight-normal">APP_NAME</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Naver</h1>
       <div th:if="${param.error}">
         아이디와 비밀번호 일치하지 않음
       </div>
@@ -22,11 +22,11 @@
       <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" />
       <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
     </form>
-    <form class="form-signin" th:action="@{/signup}" method="GET">
+    <form class="form-signin" th:action="@{/dev/signup}" method="GET">
       <button class="btn btn-md btn-success btn-block" type="Submit">회원가입</button>
     </form>
-    <a th:href="@{/findUsername}">아이디 |</a>
-    <a th:href="@{/findPassword}"> 비밀번호 찾기</a>
+    <a th:href="@{/dev/findUsername}">아이디 |</a>
+    <a th:href="@{/dev/findPassword}"> 비밀번호 찾기</a>
 
   </div>
 </body>

@@ -29,7 +29,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		
         security.tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()")
                 .allowFormAuthenticationForClients();
@@ -38,16 +37,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.withClientDetails(clientDetailService);
-		
 		/*
-        clients
-	        .inMemory()
-	        .withClient("ClientId")
-	        .secret(passwordEncoder.encode("secret"))
-	        .authorizedGrantTypes("authorization_code")
-	        .scopes("user_info")
-	        .redirectUris("http://localhost:8082/login");
-        */
+		clients.inMemory
+				.withClient("q")
+		        .secret(passwordEncoder.encode("w"))
+		        .authorizedGrantTypes("authorization_code")
+		        .scopes("read,basic,profile")
+		        .redirectUris("http://localhost:8082/userInfo");
+	    */  
 	}
 	
 	@Override
