@@ -21,14 +21,8 @@ public class PrincipalController {
 	@Autowired
 	CustomOauth2ClientDetailsService customOauth2ClientDetailsService;
 	
-	@GetMapping("/principal")
+	@RequestMapping("/principal")
 	public Principal user(Principal principal) {
 		return principal;
 	}
-	
-	@GetMapping("/rest/hello/hi")
-	public String hello() {
-		return "Hi World";
-	}
-	
 }

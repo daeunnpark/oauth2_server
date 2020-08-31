@@ -31,22 +31,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
+		
+		
 		http.authorizeRequests()
 				.antMatchers("/ouath/token", "ouath/authorize").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
 				.permitAll();
-		
+			
 		http.sessionManagement()
         	.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-	    web
-	    	.ignoring()
+	    web.ignoring()
 	    	.antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
 	

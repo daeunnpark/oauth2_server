@@ -18,16 +18,17 @@ import com.daeunp.springsecurityserver.service.CustomUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetailsService;
 @Configuration
 @EnableResourceServer
+@Order(3)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
+		
 		http.authorizeRequests()
 				.antMatchers("/", "/login").permitAll()
 				.antMatchers("/principal").authenticated()
 				.and()
 			.formLogin()
 				.permitAll();
-		
 	}
 }
