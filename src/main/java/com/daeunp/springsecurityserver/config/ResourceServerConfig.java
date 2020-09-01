@@ -16,19 +16,19 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import com.daeunp.springsecurityserver.service.CustomUserDetailsService;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
+import org.springframework.security.web.util.matcher.OrRequestMatcher;
+
 @Configuration
 @EnableResourceServer
-@Order(3)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
-	
+
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		
+
 		http.authorizeRequests()
-				.antMatchers("/", "/login").permitAll()
 				.antMatchers("/principal").authenticated()
-				.and()
-			.formLogin()
-				.permitAll();
+				.antMatchers("/").permitAll();
 	}
 }
