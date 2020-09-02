@@ -9,7 +9,9 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 
 @SpringBootApplication
 public class SpringSecurityServerApplication {
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSecurityServerApplication.class, args);
 	}
+
 }
