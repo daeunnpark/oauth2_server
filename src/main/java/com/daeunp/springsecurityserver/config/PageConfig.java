@@ -8,6 +8,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * TO BE REMOVED
+ */
 @Configuration
 public class PageConfig implements WebMvcConfigurer{
 	@Bean

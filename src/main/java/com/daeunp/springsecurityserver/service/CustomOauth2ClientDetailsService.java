@@ -1,7 +1,7 @@
 package com.daeunp.springsecurityserver.service;
 
-import java.util.List;
-
+import com.daeunp.springsecurityserver.model.Oauth2Client;
+import com.daeunp.springsecurityserver.repository.Oauth2ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
@@ -10,11 +10,10 @@ import org.springframework.security.oauth2.provider.client.BaseClientDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.daeunp.springsecurityserver.model.Oauth2Client;
-import com.daeunp.springsecurityserver.repository.Oauth2ClientRepository;
+import java.util.List;
 
 @Service
-public class CustomOauth2ClientDetailsService implements ClientDetailsService{
+public class CustomOauth2ClientDetailsService implements ClientDetailsService {
 
     @Autowired
     private Oauth2ClientRepository oauth2ClientRepository;
@@ -25,12 +24,12 @@ public class CustomOauth2ClientDetailsService implements ClientDetailsService{
         Oauth2Client client = oauth2ClientRepository.findByClientId(clientId);
         return new BaseClientDetails(client);
     }
-    
-    public List<Oauth2Client> findByUserId(String userId){
-    	return oauth2ClientRepository.findByUserId(userId);	
+
+    public List<Oauth2Client> findByUserId(String userId) {
+        return oauth2ClientRepository.findByUserId(userId);
     }
-    
+
     public void save(Oauth2Client client) {
-    	oauth2ClientRepository.save(client);
+        oauth2ClientRepository.save(client);
     }
 }
