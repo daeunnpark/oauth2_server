@@ -39,8 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public boolean exists(String username) {
 		return userRepository.findByUsername(username)!=null;
 	}
-	
-	
+
 	public void saveUser(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		user.setActive(true);

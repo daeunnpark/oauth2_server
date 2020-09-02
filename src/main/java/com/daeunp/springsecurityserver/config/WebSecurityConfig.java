@@ -26,6 +26,7 @@ import org.springframework.security.web.util.matcher.OrRequestMatcher;
 
 @Configuration
 @EnableResourceServer
+//@Order(1)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -36,28 +37,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-/*
-		http.requestMatchers()
-				.antMatchers("/login", "/oauth/authorize")
-				.and()
-				.authorizeRequests()
-				.anyRequest()
-				.authenticated()
-				.and()
-				.formLogin()
-				.permitAll();
-
-			http.antMatcher("/**")
-				.authorizeRequests()
-				.antMatchers("/oauth/authorize**", "/login**", "/error**")
-				.permitAll()
-			.and()
-				.authorizeRequests()
-				.anyRequest().authenticated()
-			.and()
-				.formLogin().permitAll();
-*/
-
 		http.requestMatchers()
 				// For org.springframework.security.web.SecurityFilterChain.matches(HttpServletRequest)
 				.requestMatchers(

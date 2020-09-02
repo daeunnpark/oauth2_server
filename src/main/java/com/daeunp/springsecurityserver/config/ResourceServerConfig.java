@@ -26,12 +26,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-	    /*
-		http.authorizeRequests()
-				.antMatchers("/principal").authenticated()
-				.antMatchers("/").permitAll();
-
-	     */
         http.requestMatchers()
                 // For org.springframework.security.web.SecurityFilterChain.matches(HttpServletRequest)
                 .requestMatchers(
@@ -47,6 +41,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
                 )
                 .and()
                 .authorizeRequests().anyRequest().authenticated();
+
 	}
 
 

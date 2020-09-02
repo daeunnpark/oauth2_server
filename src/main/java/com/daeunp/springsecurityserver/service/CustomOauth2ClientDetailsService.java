@@ -26,7 +26,7 @@ public class CustomOauth2ClientDetailsService implements ClientDetailsService{
         return new BaseClientDetails(client);
     }
     
-    public List<Oauth2Client> findByUserId(String userId){
+    public List<Oauth2Client> findByUserId(Integer userId){
     	return oauth2ClientRepository.findByUserId(userId);	
     }
     
