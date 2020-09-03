@@ -1,11 +1,22 @@
 package com.daeunp.springsecurityserver.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.oauth2.provider.ClientDetails;
-
-import javax.persistence.*;
-import java.util.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Entity
 @Table(name = "Client")
@@ -19,23 +30,19 @@ public class Oauth2Client implements ClientDetails {
     private String name;
     private String homepageUrl;
     private String clientId;
-    private String resourceIds;
+	private String resourceIds;
     private String clientSecret;
     private String scope;
     private String grantTypes;
     private String redirectUri;
-    private String authorities;
+	private String authorities;
     private Integer accessTokenValiditySeconds;
     private Integer refreshTokenValiditySeconds;
     private Boolean autoApprove;
-
+    
     @Override
     public String getClientId() {
         return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
     }
 
     @Override
@@ -53,10 +60,6 @@ public class Oauth2Client implements ClientDetails {
     @Override
     public String getClientSecret() {
         return clientSecret;
-    }
-
-    public void setClientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
     }
 
     @Override
@@ -111,25 +114,34 @@ public class Oauth2Client implements ClientDetails {
         return null;
     }
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+	public void setName(String name) {
+		this.name = name;
+	}
+	
     public String getHomepageUrl() {
-        return homepageUrl;
-    }
+		return homepageUrl;
+	}
 
-    public void setHomepageUrl(String homepageUrl) {
-        this.homepageUrl = homepageUrl;
+	public void setHomepageUrl(String homepageUrl) {
+		this.homepageUrl = homepageUrl;
+	}
+	
+    public void setClientId(String clientId) {
+		this.clientId = clientId;
+	}
+      
+    public void setClientSecret(String clientSecret) {
+    	this.
+    	clientSecret=clientSecret;
     }
-
+    
     public void setRedirectUri(String redirectUri) {
-        this.redirectUri = redirectUri;
-    }
+		this.redirectUri = redirectUri;
+	}
 }
 
 
