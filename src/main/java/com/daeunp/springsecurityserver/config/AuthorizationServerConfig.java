@@ -38,14 +38,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.withClientDetails(clientDetailService);
-		/*
-		clients.inMemory
-				.withClient("q")
-		        .secret(passwordEncoder.encode("w"))
-		        .authorizedGrantTypes("authorization_code")
-		        .scopes("read,basic,profile")
-		        .redirectUris("http://localhost:8082/userInfo");
-	    */  
 	}
 	
 	@Override
