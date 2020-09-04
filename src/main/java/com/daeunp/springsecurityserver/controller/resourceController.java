@@ -53,8 +53,8 @@ public class resourceController {
 		if (scopes.contains("phone")) {
 			profile.put("phone", user.getPhone());
 		}
+		
 		System.out.println(profile);
-		System.out.println(profile.toString());
 
 		body.put("profile", profile);
 		return new ResponseEntity<Map<String, Object>>(body, HttpStatus.OK);
