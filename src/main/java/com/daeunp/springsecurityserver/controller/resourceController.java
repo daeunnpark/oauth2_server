@@ -33,30 +33,61 @@ public class resourceController {
 	@Autowired
 	CustomUserDetailsService userService;
 
-	@RequestMapping("/principal")
-		public ResponseEntity<Map<String, Object>> userData(@AuthenticationPrincipal OAuth2Authentication auth, Principal p) {
-			Map<String, Object> body = new HashMap<String, Object>();
-			Map<String, Object> profile = new HashMap<String, Object>();
+	@RequestMapping("/userInfo/kwj")
+	public ResponseEntity<Map<String, Object>> userData(@AuthenticationPrincipal OAuth2Authentication auth, Principal p) {
+		Map<String, Object> body = new HashMap<String, Object>();
+		Map<String, Object> profile = new HashMap<String, Object>();
 
-			Set<String> scopes = auth.getOAuth2Request().getScope();
-			System.out.println("------------SCOPES-----------");
-			System.out.println(scopes.toArray());
-			User user = userService.findByUsername(p.getName());
+		Set<String> scopes = auth.getOAuth2Request().getScope();
+		User user = userService.findByUsername(p.getName());
 
-			if (scopes.contains("id")) {
-				profile.put("id", user.getUsername());
-			}
-			if (scopes.contains("name")) {
-				profile.put("name", user.getName());
-			}
-			if (scopes.contains("email")) {
-				profile.put("email", user.getEmail());
-			}
-			if (scopes.contains("phone")) {
-				profile.put("phone", user.getPhone());
-			}
+		if (scopes.contains("id")) {
+			profile.put("id", user.getUsername());
+		}
+		if (scopes.contains("name")) {
+			profile.put("name", user.getName());
+		}
+		if (scopes.contains("email")) {
+			profile.put("email", user.getEmail());
+		}
+		if (scopes.contains("phone")) {
+			profile.put("phone", user.getPhone());
+		}
+		System.out.println(profile);
+		System.out.println(profile.toString());
 
-			body.put("profile", profile);
-			return new ResponseEntity<Map<String, Object>>(body, HttpStatus.OK);
+		body.put("profile", profile);
+		return new ResponseEntity<Map<String, Object>>(body, HttpStatus.OK);
 	}
+
+
+	@RequestMapping("/principal")
+	public Principal userData2( Principal p) {
+		return p;
+		/*
+		Map<String, Object> body = new HashMap<String, Object>();
+		Map<String, Object> profile = new HashMap<String, Object>();
+
+		Set<String> scopes = auth.getOAuth2Request().getScope();
+		User user = userService.findByUsername(p.getName());
+
+		if (scopes.contains("id")) {
+			profile.put("id", user.getUsername());
+		}
+		if (scopes.contains("name")) {
+			profile.put("name", user.getName());
+		}
+		if (scopes.contains("email")) {
+			profile.put("email", user.getEmail());
+		}
+		if (scopes.contains("phone")) {
+			profile.put("phone", user.getPhone());
+		}
+
+		body.put("profile", profile);
+		return "dataaaaas";
+
+		 */
+	}
+
 }
