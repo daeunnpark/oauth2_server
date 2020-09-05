@@ -30,7 +30,48 @@ public class Oauth2Client implements ClientDetails {
     private User user;
     private String name;
     private String homepageUrl;
-	private String resourceIds;
+
+    public void setResourceIds(String resourceIds) {
+        this.resourceIds = resourceIds;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    public String getGrantTypes() {
+        return grantTypes;
+    }
+
+    public void setGrantTypes(String grantTypes) {
+        this.grantTypes = grantTypes;
+    }
+
+    public String getRedirectUri() {
+        return redirectUri;
+    }
+
+    public void setAuthorities(String authorities) {
+        this.authorities = authorities;
+    }
+
+    public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
+        this.accessTokenValiditySeconds = accessTokenValiditySeconds;
+    }
+
+    public void setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
+        this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
+    }
+
+    public Boolean getAutoApprove() {
+        return autoApprove;
+    }
+
+    public void setAutoApprove(Boolean autoApprove) {
+        this.autoApprove = autoApprove;
+    }
+
+    private String resourceIds;
     private String scope;
     private String grantTypes;
     private String redirectUri;

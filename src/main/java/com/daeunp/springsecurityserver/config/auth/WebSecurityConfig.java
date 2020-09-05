@@ -35,10 +35,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				// For org.springframework.security.web.SecurityFilterChain.matches(HttpServletRequest)
 				.requestMatchers(
 						new OrRequestMatcher(
-								new AntPathRequestMatcher("/login"),
-								new AntPathRequestMatcher("/logout"),
-								new AntPathRequestMatcher("/oauth/authorize"),
-								new AntPathRequestMatcher("/oauth/confirm_access")
+								new AntPathRequestMatcher("/api/login"),
+								new AntPathRequestMatcher("/api/logout"),
+								new AntPathRequestMatcher("/api/oauth/authorize"),
+								new AntPathRequestMatcher("/api/oauth/confirm_access")
 						)
 				)
 				.and()
