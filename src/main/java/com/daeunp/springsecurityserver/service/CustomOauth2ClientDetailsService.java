@@ -19,17 +19,29 @@ public class CustomOauth2ClientDetailsService implements ClientDetailsService{
     @Autowired
     private Oauth2ClientRepository oauth2ClientRepository;
 
+
     @Override
     @Transactional
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
         Oauth2Client client = oauth2ClientRepository.findByClientId(clientId);
+        System.out.println("clientId = " +  clientId);
+        System.out.println(client.toString());
+        System.out.println(client.getName());
+        System.out.println(client.getClientSecret());
+        ClientDetails d = new BaseClientDetails(client);
+        System.out.println(d.toString());
         return new BaseClientDetails(client);
     }
-    
-    public List<Oauth2Client> findByUserId(Integer userId){
-    	return oauth2ClientRepository.findByUserId(userId);	
+
+    public List<Oauth2Client> findByUsername(String username){
+    	return oauth2ClientRepository.findByUserUsername(username);
     }
-    
+    public Oauth2Client findByUsernameAndClientname(String username, String appName ){
+        return oauth2ClientRepository.findByUserUsernameAndName(username, appName);
+    }
+    public void delete(Oauth2Client client){
+        oauth2ClientRepository.delete(client);
+    }
     public void save(Oauth2Client client) {
     	oauth2ClientRepository.save(client);
     }

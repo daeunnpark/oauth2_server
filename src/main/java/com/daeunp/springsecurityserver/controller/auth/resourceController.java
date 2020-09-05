@@ -1,4 +1,4 @@
-package com.daeunp.springsecurityserver.controller;
+package com.daeunp.springsecurityserver.controller.auth;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -53,7 +53,7 @@ public class resourceController {
 		if (scopes.contains("phone")) {
 			profile.put("phone", user.getPhone());
 		}
-		
+
 		System.out.println(profile);
 
 		body.put("profile", profile);
@@ -61,7 +61,7 @@ public class resourceController {
 	}
 
 
-	@RequestMapping("/principal")
+	@RequestMapping("/userInfo")
 	public Principal userData2( Principal p) {
 		return p;
 		/*

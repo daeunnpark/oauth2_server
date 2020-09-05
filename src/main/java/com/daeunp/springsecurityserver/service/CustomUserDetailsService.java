@@ -21,29 +21,21 @@ public class CustomUserDetailsService implements UserDetailsService{
 
 	@Autowired
 	UserRepository userRepository;
-	
-	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-    
+
 	@Override
 	public UserDetails loadUserByUsername(String username)  {
-		User user = userRepository.findByUsername(username);		
-		return new CustomUserDetails(user);
+		return new CustomUserDetails(userRepository.findByUsername(username));
 	}
-	
+
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
-	
+
 	public boolean exists(String username) {
-		return userRepository.findByUsername(username)!=null;
+		return userRepository.existsByUsername(username);
 	}
 
 	public void saveUser(User user) {
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setActive(true);
-		user.setRoles("ROLE_USER");
 		userRepository.save(user);
 	}
 	

@@ -11,6 +11,7 @@ import com.daeunp.springsecurityserver.model.Oauth2Client;
 
 public interface Oauth2ClientRepository extends JpaRepository<Oauth2Client, Integer> {
 	Oauth2Client findByClientId(String clientId);
-	List<Oauth2Client> findByUserId(Integer id);
+	List<Oauth2Client> findByUserUsername(String username);
+	Oauth2Client findByUserUsernameAndName(String username, String name);
 
 }

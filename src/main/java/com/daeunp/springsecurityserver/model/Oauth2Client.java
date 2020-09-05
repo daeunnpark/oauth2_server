@@ -22,16 +22,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Table(name = "Client")
 public class Oauth2Client implements ClientDetails {
 
+
     @Id
-    @GeneratedValue
-    private Integer id;
+    private String clientId;
+    private String clientSecret;
     @ManyToOne
     private User user;
     private String name;
     private String homepageUrl;
-    private String clientId;
 	private String resourceIds;
-    private String clientSecret;
     private String scope;
     private String grantTypes;
     private String redirectUri;
@@ -39,7 +38,7 @@ public class Oauth2Client implements ClientDetails {
     private Integer accessTokenValiditySeconds;
     private Integer refreshTokenValiditySeconds;
     private Boolean autoApprove;
-    
+
     @Override
     public String getClientId() {
         return clientId;
@@ -96,17 +95,17 @@ public class Oauth2Client implements ClientDetails {
 
     @Override
     public Integer getAccessTokenValiditySeconds() {
-        return accessTokenValiditySeconds;
+        return this.accessTokenValiditySeconds;
     }
 
     @Override
     public Integer getRefreshTokenValiditySeconds() {
-        return refreshTokenValiditySeconds;
+        return this.refreshTokenValiditySeconds;
     }
 
     @Override
     public boolean isAutoApprove(String scope) {
-        return autoApprove;
+        return this.autoApprove;
     }
 
     @Override
@@ -115,7 +114,7 @@ public class Oauth2Client implements ClientDetails {
     }
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -123,7 +122,7 @@ public class Oauth2Client implements ClientDetails {
 	}
 	
     public String getHomepageUrl() {
-		return homepageUrl;
+		return this.homepageUrl;
 	}
 
 	public void setHomepageUrl(String homepageUrl) {
@@ -135,13 +134,22 @@ public class Oauth2Client implements ClientDetails {
 	}
       
     public void setClientSecret(String clientSecret) {
-    	this.
-    	clientSecret=clientSecret;
+    	this.clientSecret=clientSecret;
     }
     
     public void setRedirectUri(String redirectUri) {
 		this.redirectUri = redirectUri;
 	}
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
 }
 
 
