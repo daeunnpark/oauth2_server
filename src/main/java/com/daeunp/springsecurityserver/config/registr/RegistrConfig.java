@@ -27,6 +27,7 @@ public class RegistrConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+/*
         System.out.println("*******regiss");
         http.authorizeRequests()
                 .antMatchers("/app/**").authenticated()
@@ -34,6 +35,8 @@ public class RegistrConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/**").permitAll()
                 .and()
                 .formLogin().loginPage("/login").permitAll();
+*/
+
     }
 
     @Override

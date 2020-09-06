@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
@@ -16,27 +17,18 @@ import org.springframework.security.web.util.matcher.OrRequestMatcher;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
+
+	@Override
+	public void configure(ResourceServerSecurityConfigurer resources) {
+		resources.resourceId("oauth2-resource").stateless(false);
+	}
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-        System.out.println("*******resource");
-        http.requestMatchers()
-                // For org.springframework.security.web.SecurityFilterChain.matches(HttpServletRequest)
-                .requestMatchers(
-                        new NegatedRequestMatcher(
-
-                                new OrRequestMatcher(
-                                        new AntPathRequestMatcher("/api/login"),
-                                        new AntPathRequestMatcher("/api/logout"),
-                                        new AntPathRequestMatcher("/api/oauth/authorize"),
-                                        new AntPathRequestMatcher("/api/oauth/confirm_access")
-                                )
-                        )
-                )
-                .and()
-                .authorizeRequests().anyRequest().authenticated()
+        http
+                .authorizeRequests()
+                .antMatchers("/api/**").authenticated()
+                .antMatchers("/").permitAll()
                 .and()
                 .csrf().disable();
-
 	}
-
 }

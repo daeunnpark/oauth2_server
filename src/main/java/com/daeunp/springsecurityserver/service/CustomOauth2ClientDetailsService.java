@@ -24,10 +24,6 @@ public class CustomOauth2ClientDetailsService implements ClientDetailsService{
     @Transactional
     public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
         Oauth2Client client = oauth2ClientRepository.findByClientId(clientId);
-        System.out.println("clientId = " +  clientId);
-        System.out.println(client.toString());
-        System.out.println(client.getName());
-        System.out.println(client.getClientSecret());
         ClientDetails d = new BaseClientDetails(client);
         System.out.println(d.toString());
         return new BaseClientDetails(client);

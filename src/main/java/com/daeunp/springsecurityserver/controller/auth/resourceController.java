@@ -61,7 +61,7 @@ public class resourceController {
 	}
 
 
-	@RequestMapping("/userInfo")
+	@RequestMapping("/api/userInfo")
 	public Principal userData2( Principal p) {
 		return p;
 		/*
