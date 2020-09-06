@@ -49,43 +49,16 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter{
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.withClientDetails(clientDetailService);
-		/*
-		clients
-				.inMemory()
-				.withClient("clientID")
-				.secret("nono")
-				.authorizedGrantTypes("authorization_code" )
-				.scopes("name")
-				.accessTokenValiditySeconds(3600).
-				refreshTokenValiditySeconds(3600)
-				.redirectUris("https://oauth.pstmn.io/v1/callback");
-
-		 */
 	}
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.authenticationManager(authenticationManager);
-				//.tokenStore(tokenStore);
-		//endpoints.setClientDetailsService(clientDetailService);
-		endpoints.userDetailsService(customUserDetailsService);
-
-				//.userDetailsService(customUserDetailsService);
+		endpoints.authenticationManager(authenticationManager)
+					.userDetailsService(customUserDetailsService);
 	}
 	@Bean
 	public PasswordEncoder encoder(){
 		return  NoOpPasswordEncoder.getInstance();
 	}
 
-	/*
-	@Bean
-	public FilterRegistrationBean oauth2ClientFilterRegistration(
-			OAuth2ClientContextFilter filter) {
-		FilterRegistrationBean registration = new FilterRegistrationBean();
-		registration.setFilter(filter);
-		registration.setOrder(-100);
-		return registration;
-	}
-
-	 */
 }

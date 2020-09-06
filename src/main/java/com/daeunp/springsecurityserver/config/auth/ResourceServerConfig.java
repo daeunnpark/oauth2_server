@@ -17,11 +17,6 @@ import org.springframework.security.web.util.matcher.OrRequestMatcher;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
-
-	@Override
-	public void configure(ResourceServerSecurityConfigurer resources) {
-		resources.resourceId("oauth2-resource").stateless(false);
-	}
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
         http

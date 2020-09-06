@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 				.antMatcher("/**")
 				.authorizeRequests()
-				.antMatchers("/oauth/authorize**", "/oauth/token", "/login**", "/error**")
+				.antMatchers("/oauth/authorize**", "/login**", "/error**")
 				.permitAll()
 				.and()
 				.authorizeRequests()
@@ -64,19 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	protected void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-
-		//auth.parentAuthenticationManager(authenticationManagerBean())
 			auth.userDetailsService(customUserDetailsService)
 			.passwordEncoder(passwordEncoder);
-
-		/*
-		auth.inMemoryAuthentication()
-				.withUser("user")s
-				.password("{noop}pass")
-				.roles("USER");
-
-		 */
-
 	}
 
 	@Bean
@@ -89,20 +78,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	public TokenStore tokenStore() {
 		return new InMemoryTokenStore();
 	}
-	/*
-	@Bean
-	public FilterRegistrationBean corsFilter() {
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
-		config.addAllowedOrigin("*");
-		config.addAllowedHeader("*");
-		config.addAllowedMethod("*");
-		source.registerCorsConfiguration("/**", config);
-		FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-		bean.setOrder(0);
-		return bean;
-	}
-*/
-
 }

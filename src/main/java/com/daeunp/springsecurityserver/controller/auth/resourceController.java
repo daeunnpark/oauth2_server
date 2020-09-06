@@ -35,6 +35,7 @@ public class resourceController {
 
 	@RequestMapping("/userInfo/kwj")
 	public ResponseEntity<Map<String, Object>> userData(@AuthenticationPrincipal OAuth2Authentication auth, Principal p) {
+		System.out.println("HEREE");
 		Map<String, Object> body = new HashMap<String, Object>();
 		Map<String, Object> profile = new HashMap<String, Object>();
 
@@ -63,6 +64,7 @@ public class resourceController {
 
 	@RequestMapping("/api/userInfo")
 	public Principal userData2( Principal p) {
+		System.out.println("*****USER INFO HEREEEE");
 		return p;
 		/*
 		Map<String, Object> body = new HashMap<String, Object>();
